@@ -1,13 +1,29 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import {db} from "~/server/db"
+import {type ErrorResponse, type PokemonResponse} from "~/lib/responseTypes";
 
-type ResponseData = {
-  message: string;
-};
-
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseData>,
+  res: NextApiResponse<PokemonResponse[] | PokemonResponse | ErrorResponse>,
 ) {
-  console.log("CALL BACKEND");
-  res.status(200).json({ message: "Condor family!" });
+  if (req.method === 'GET') {
+    try {
+      const pokemon = await db.pokemon.findMany() as PokemonResponse[];
+      res.status(200).json(pokemon);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch pokemon' });
+    }
+  } else if (req.method === 'POST') {
+    try {
+      const pokemon = await db.pokemon.create({
+        data: req.body,
+      }) as PokemonResponse;
+      res.status(201).json(pokemon);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to create pokemon' });
+    }
+  } else {
+    res.setHeader('Allow', ['GET', 'POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
 }
