@@ -3,6 +3,7 @@ type PokemonResponse = {
   name: string,
   number: string,
   pokemonPhoto: string,
+  pokemonPhotoUrl: string,
   type: string,
   description: string,
   height: string,
@@ -13,6 +14,7 @@ type PokemonResponse = {
   eggGroups: string,
   evolutions: string,
   evolutionPhoto: string,
+  evolutionPhotoUrl: string,
   createdAt: Date,
   updatedAt: Date,
 };

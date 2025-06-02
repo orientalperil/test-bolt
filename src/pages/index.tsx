@@ -32,14 +32,35 @@ export default function Home() {
           <div className="relative">
             <img src="/pokedex.png" />
             <div className="absolute pokedex-left-view">
-              <p>{pokemon.name}</p>
+              <div className="flex flex-col p-2">
+                <div className="flex justify-between">
+                  <div className="font-semibold">{pokemon.name}</div>
+                  <div>N° {pokemon.number}</div>
+                </div>
+                <div className="mt-1">
+                  <div>{pokemon.type}</div>
+                  <div className="mt-1">{pokemon.description}</div>
+                </div>
+                <div className="flex justify-between mt-1 px-6">
+                  <div className="flex flex-col">
+                    <div className="font-semibold">Height</div>
+                    <div>{pokemon.height}</div>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="font-semibold">Weight</div>
+                    <div>{pokemon.weight}</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="absolute pokedex-right-view"></div>
-            <div className="absolute pokedex-search-button flex items-center justify-center">
-              <button onClick={changePokemon}>Search</button>
+            <div className="absolute pokedex-right-view bg-white flex justify-center items-center">
+              <img src="/pikachu.png" height="135" width="144" />
             </div>
-            <div className="absolute pokedex-view-button flex items-center justify-center">
-              <Link href={`/pokedex/${pokemon.id}`}>View more</Link>
+            <div className="absolute pokedex-search-button flex items-center justify-center pokedex-text">
+              <button onClick={changePokemon} className="font-semibold">Search</button>
+            </div>
+            <div className="absolute pokedex-view-button flex items-center justify-center pokedex-text">
+              <Link href={`/pokedex/${pokemon.id}`} className="font-semibold">View more</Link>
             </div>
           </div>
         </div>

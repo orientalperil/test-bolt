@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import {db} from "~/server/db"
 import {type ErrorResponse, type PokemonResponse} from "~/lib/responseTypes";
+import {getPokemonResponse} from "~/lib/utils";
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,18 +13,20 @@ export default async function handler(
         where: {
           id: Number(req.query.id),
         },
-      }) as PokemonResponse;
-      res.status(200).json(pokemon);
+      })
+      const p = await getPokemonResponse(pokemon)
+      res.status(200).json(p);
     } catch (error) {
       res.status(404).json({ error: 'Pokemon not found' });
     }
   } else if (req.method === 'PUT') {
     try {
       const updatedPokemon = await db.pokemon.update({
-          where: { id: Number(req.query.id) },
-          data: req.body,
-        }) as PokemonResponse;
-      return res.status(200).json(updatedPokemon);
+        where: { id: Number(req.query.id) },
+        data: req.body,
+      })
+      const p = await getPokemonResponse(updatedPokemon)
+      return res.status(200).json(p);
     } catch (error) {
       res.status(500).json({ error: 'Failed to update pokemon' });
     }

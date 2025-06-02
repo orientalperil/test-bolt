@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {useCallback, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {type PokemonResponse} from "~/lib/responseTypes";
 import { FaPlusCircle } from "react-icons/fa";
 
@@ -52,37 +52,22 @@ export default function Pokedex() {
           <Link href="/pokedex/create">
             <button type="button"
                     className="text-white bg-gray-solid font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
-              <FaPlusCircle className="mr-2"/>
+                <FaPlusCircle className="react-icons-align-text mr-2"/>
               Create New
             </button>
           </Link>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-4">
             {pokemon.map(pokemon => (
-              <Link href={`/pokedex/${pokemon.id}`}>
-                <div key={pokemon.id} className="bg-gray-solid p-6 rounded-lg">
-                  <h2 className="text-lg font-semibold">{pokemon.name}</h2>
-                  <p>{pokemon.number}</p>
-                  <p>{pokemon.type}</p>
+              <Link key={pokemon.id} href={`/pokedex/${pokemon.id}`}>
+                <div key={pokemon.id} className="bg-gray-solid p-6 rounded-lg flex flex-col items-center">
+                  <img src="/pikachu.png" height="135" width="144" />
+                  <div className="mt-4">N° {pokemon.number}</div>
+                  <div className="text-lg font-bold">{pokemon.name}</div>
+                  <div className="text-orange-400">{pokemon.type}</div>
                 </div>
               </Link>
             ))}
-            <div className="bg-gray-solid p-6 rounded-lg">
-              <h2 className="text-xl font-bold mb-2">Card 1</h2>
-              <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div className="bg-gray-solid p-6 rounded-lg">
-              <h2 className="text-xl font-bold mb-2">Card 2</h2>
-              <p className="text-gray-600">Sed do eiusmod tempor incididunt ut labore et dolore.</p>
-            </div>
-            <div className="bg-gray-solid p-6 rounded-lg">
-              <h2 className="text-xl font-bold mb-2">Card 3</h2>
-              <p className="text-gray-600">Ut enim ad minim veniam, quis nostrud exercitation.</p>
-            </div>
-            <div className="bg-gray-solid p-6 rounded-lg">
-              <h2 className="text-xl font-bold mb-2">Card 4</h2>
-              <p className="text-gray-600">Duis aute irure dolor in reprehenderit in voluptate.</p>
-            </div>
           </div>
         </div>
       ) : (

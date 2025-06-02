@@ -17,7 +17,7 @@
   background-color: #272727;
 }
 
-.react-icons {
+.react-icons-align-text {
   display: inline;
   vertical-align: text-bottom;
 }
@@ -27,6 +27,21 @@
   left: 13.6%;
   height: 31.5%;
   width: 26.6%;
+}
+
+.pokedex-left-view {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+@media screen and (max-width: 800px) {
+  .pokedex-left-view {
+    font-size: 0.4rem;
+    line-height: 0.6rem;
+  }
+  .pokedex-text {
+    font-size: 0.5rem;
+  }
 }
 
 .pokedex-right-view {
