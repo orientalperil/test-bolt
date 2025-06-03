@@ -56,8 +56,8 @@ export default function Pokedex() {
         <div className="bg-dark text-white rounded-lg my-8 p-8 max-w-7xl">
           <div className="text-2xl font-bold mb-4">Pokedex</div>
           <div className="flex flex-col lg:flex-row justify-between">
-            <div className="flex flex-col lg:flex-row">
-              <div className="relative max-w-md">
+            <div className="flex flex-col lg:flex-row gap-6 h-10">
+              <div className="relative max-w-md w-full">
                 <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                   <svg className="w-4 h-4 text-white" aria-hidden="true"
                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -65,14 +65,14 @@ export default function Pokedex() {
                           d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                   </svg>
                 </div>
-                <input className="block w-full p-4 ps-10 text-sm text-white rounded-lg bg-gray-solid placeholder-white"
+                <input className="block w-full py-2.5 ps-10 text-sm text-white rounded-lg bg-gray-solid placeholder-white"
                        placeholder="Search Pokemon"
                        value={query}
                        onChange={handleSearch}/>
               </div>
 
-              <div className="w-40">
-                <select className="bg-gray-solid text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              <div className="w-60">
+                <select className="bg-gray-solid text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   value={type}
                   onChange={handleTypeChange}
                 >
