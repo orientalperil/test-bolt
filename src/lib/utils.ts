@@ -3,7 +3,8 @@ import clone from "lodash/clone";
 import zip from "lodash/zip";
 
 async function convertPathnamesToUrls(obj: object, keys: string[]) {
-  const cloned: Record<string, string> = clone(obj)
+  const cloned = clone(obj)
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   const pathnames = keys.map((k): string => cloned[k])
   const promises = pathnames.map(async (p: string) => {
     if (!p) {
