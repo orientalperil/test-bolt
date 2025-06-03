@@ -66,7 +66,7 @@ export default function Create() {
     <>
       {pokemon ? (
         <div className="bg-dark text-white rounded-lg my-8 p-8 max-w-7xl">
-          <div className="text-2xl font-bold mb-4">Pika</div>
+          <div className="text-2xl font-bold mb-4">{pokemon.name}</div>
           <Form onSubmit={onSubmit} buttonText="Update" cancelRedirect={`/pokedex/${id}`} defaultValues={defaultValues} imageDefaults={imageDefaults}/>
         </div>
       ) : (
