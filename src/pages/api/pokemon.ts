@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import {db} from "~/server/db"
-import {type ErrorResponse, type PokemonResponse} from "~/lib/responseTypes";
+import {type ErrorResponse, type PokemonCreateRequest, type PokemonResponse} from "~/lib/types";
 import {getPokemonResponse} from "~/lib/utils";
 
 export default async function handler(
@@ -41,8 +41,9 @@ export default async function handler(
     }
   } else if (req.method === 'POST') {
     try {
-      const pokemon = await db.pokemon.create({
-        data: req.body,
+      const body = req.body as PokemonCreateRequest;
+      const pokemon: Record<string, string> = await db.pokemon.create({
+        data: body,
       })
       const p = await getPokemonResponse(pokemon)
       res.status(201).json(p);

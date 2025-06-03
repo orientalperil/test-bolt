@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import {db} from "~/server/db"
-import {type ErrorResponse, type PokemonResponse} from "~/lib/responseTypes";
+import {type ErrorResponse, type PokemonResponse} from "~/lib/types";
 import {getPokemonResponse} from "~/lib/utils";
 
 export default async function handler(

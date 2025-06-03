@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {useCallback, useEffect, useState} from "react";
-import {type PokemonResponse, type  BlobResponse} from "~/lib/responseTypes";
+import {type PokemonResponse} from "~/lib/types";
 import {useRouter} from "next/router";
 import { FaArrowLeft, FaArrowRight, FaPencilAlt, FaTrash } from "react-icons/fa";
 
@@ -9,11 +9,12 @@ export default function Detail() {
   const [photo, setPhoto] = useState<string>('')
   const [evolutionPhoto, setEvolutionPhoto] = useState<string>('')
   const router = useRouter();
+  const {id} = router.query as { id?: string }
 
   const getPokemon = useCallback(async (): Promise<PokemonResponse | null> => {
-    if (router.query.id) {
+    if (id) {
       try {
-        const response = await fetch(`/api/pokemon/${router.query.id}`);
+        const response = await fetch(`/api/pokemon/${id}`);
         return await response.json() as PokemonResponse;
       } catch (error) {
         alert('Server had a problem');
@@ -21,7 +22,7 @@ export default function Detail() {
     } else {
       return null
     }
-  }, [router.query.id]);
+  }, [id]);
 
   useEffect(() => {
     void (async () => {

@@ -10,7 +10,7 @@ import "~/styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   const router = useRouter();
-  const { pathname, asPath, query } = router;
+  const { pathname } = router;
   return (
     <>
       <Head>

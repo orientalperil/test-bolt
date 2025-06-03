@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {useCallback, useEffect, useState} from "react";
-import {type PokemonResponse} from "~/lib/responseTypes";
+import {type PokemonResponse} from "~/lib/types";
 
 export default function Home() {
   const [pokemon, setPokemon] = useState<PokemonResponse | null>(null);

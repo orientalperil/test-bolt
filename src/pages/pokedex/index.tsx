@@ -1,6 +1,6 @@
 import Link from "next/link";
-import {useCallback, useEffect, useState} from "react";
-import {type PokemonResponse} from "~/lib/responseTypes";
+import {type ChangeEvent, useCallback, useEffect, useState} from "react";
+import {type PokemonResponse} from "~/lib/types";
 import { FaPlusCircle } from "react-icons/fa";
 import debounce from "lodash/debounce";
 import {pokemonTypes} from "~/lib/utils";
@@ -27,16 +27,16 @@ export default function Pokedex() {
     []
   );
 
-  const handleSearch = async (event) => {
+  const handleSearch = async (event: ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
     setQuery(query);
     await performSearch(query, type);
   };
 
-  let options = pokemonTypes.map((t) => ({value: t, label: t}))
+  const options = pokemonTypes.map((t) => ({value: t, label: t}));
   options.unshift({value: '', label: 'Type'})
 
-  const handleTypeChange = async (event) => {
+  const handleTypeChange = async (event: ChangeEvent<HTMLSelectElement>) => {
     const type = event.target.value
     setType(type);
     await performSearch(query, type);
