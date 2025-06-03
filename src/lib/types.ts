@@ -12,8 +12,6 @@ type PokemonCreateRequest = {
   eggGroups: string;
   evolutions: string;
   evolutionPhoto: string;
-  createdAt: Date;
-  updatedAt: Date;
 };
 
 type PokemonUpdateRequest = PokemonCreateRequest

@@ -38,7 +38,7 @@ export default async function handler(
     try {
       const body = req.body as PokemonUpdateRequest;
       const updatedPokemon = await db.pokemon.update({
-        where: { id: id },
+        where: { id: Number(id) },
         data: body,
       })
       const p = await getPokemonResponse(updatedPokemon)

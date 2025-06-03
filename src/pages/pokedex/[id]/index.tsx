@@ -72,7 +72,7 @@ export default function Detail() {
           <div className="flex justify-between">
             <Link href="/pokedex"><FaArrowLeft/></Link>
             <div>
-              <Link href="/pokedex/edit">
+              <Link href={`/pokedex/${id}/edit`}>
                 <button type="button"
                         className="text-white bg-gray-solid font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
                   <FaPencilAlt className="react-icons-align-text mr-2"/>
