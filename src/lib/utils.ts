@@ -4,8 +4,8 @@ import zip from "lodash/zip";
 import {type PokemonCreateRequest} from "~/lib/types";
 
 async function convertPathnamesToUrls(obj: PokemonCreateRequest, keys: string[]) {
-  const cloned: PokemonCreateRequest = clone(obj)
-  const pathnames = keys.map((k): string => cloned[k])
+  const cloned = clone(obj)
+  const pathnames = keys.map((k: keyof PokemonCreateRequest): string | Date => cloned[k])
   const promises = pathnames.map(async (p: string) => {
     if (!p) {
       return new Promise((resolve) => {
