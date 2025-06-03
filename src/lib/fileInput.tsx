@@ -22,7 +22,7 @@ export default function FileInput({ fieldName, register, setValue, defaultValue 
 
   useEffect(() => {
     setUrl(defaultValue)
-  }, [])
+  }, [defaultValue])
 
   return (
     <>
