@@ -28,4 +28,4 @@ type BlobResponse = {
   url: string,
 }
 
-export { PokemonResponse, ErrorResponse, BlobResponse }
+export type { PokemonResponse, ErrorResponse, BlobResponse }
