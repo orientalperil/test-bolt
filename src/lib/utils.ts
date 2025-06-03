@@ -1,10 +1,10 @@
 import {head} from '@vercel/blob';
 import clone from "lodash/clone";
 import zip from "lodash/zip";
+import {type PokemonCreateRequest} from "~/lib/types";
 
-async function convertPathnamesToUrls(obj: object, keys: string[]) {
-  const cloned = clone(obj)
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+async function convertPathnamesToUrls(obj: PokemonCreateRequest, keys: string[]) {
+  const cloned: PokemonCreateRequest = clone(obj)
   const pathnames = keys.map((k): string => cloned[k])
   const promises = pathnames.map(async (p: string) => {
     if (!p) {
@@ -30,7 +30,7 @@ async function convertPathnamesToUrls(obj: object, keys: string[]) {
   return cloned
 }
 
-async function getPokemonResponse(pokemon: object) {
+async function getPokemonResponse(pokemon: PokemonCreateRequest) {
   return await convertPathnamesToUrls(pokemon, ['pokemonPhoto', 'evolutionPhoto'])
 }
 

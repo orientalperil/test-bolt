@@ -1,5 +1,4 @@
 type PokemonCreateRequest = {
-  id: number;
   name: string,
   number: string,
   pokemonPhoto: string,
@@ -17,23 +16,7 @@ type PokemonCreateRequest = {
   updatedAt: Date,
 };
 
-type PokemonUpdateRequest  = {
-  name: string,
-  number: string,
-  pokemonPhoto: string,
-  type: string,
-  description: string,
-  height: string,
-  weight: string,
-  maleGenderRatio: string,
-  femaleGenderRatio: string,
-  abilities: string,
-  eggGroups: string,
-  evolutions: string,
-  evolutionPhoto: string,
-  createdAt: Date,
-  updatedAt: Date,
-};
+type PokemonUpdateRequest = PokemonCreateRequest
 
 type PokemonResponse = {
   id: number;
