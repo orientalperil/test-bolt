@@ -8,9 +8,33 @@ export default async function handler(
   res: NextApiResponse<PokemonResponse[] | PokemonResponse | ErrorResponse>,
 ) {
   if (req.method === 'GET') {
+    let {query, type} = req.query
+    if (!query) {
+      query = ''
+    }
+    if (!type) {
+      type = ''
+    }
     try {
-      const pokemon = await db.pokemon.findMany();
-      const p = pokemon.map(async (p) => await getPokemonResponse(p)) as PokemonResponse[]
+      let pokemon
+      if (query || type) {
+        pokemon = await db.pokemon.findMany({
+          where: {
+            name: {
+              contains: query,
+              mode: "insensitive",
+            },
+            type: {
+              contains: type,
+              mode: "insensitive",
+            },
+          },
+        });
+      } else {
+        pokemon = await db.pokemon.findMany()
+      }
+      const promises = pokemon.map(async (p) => await getPokemonResponse(p)) as PokemonResponse[]
+      const p = await Promise.all(promises)
       res.status(200).json(p);
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch pokemon' });

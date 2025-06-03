@@ -26,4 +26,25 @@ async function getPokemonResponse(pokemon) {
   return await convertPathnamesToUrls(pokemon, ['pokemonPhoto', 'evolutionPhoto']) as PokemonResponse
 }
 
-export {convertPathnamesToUrls, getPokemonResponse}
+const pokemonTypes = [
+  'Bug',
+  'Dark',
+  'Dragon',
+  'Electric',
+  'Fairy',
+  'Fighting',
+  'Fire',
+  'Flying',
+  'Ghost',
+  'Grass',
+  'Ground',
+  'Ice',
+  'Normal',
+  'Poison',
+  'Psychic',
+  'Rock',
+  'Steel',
+  'Water',
+]
+
+export {convertPathnamesToUrls, getPokemonResponse, pokemonTypes}
