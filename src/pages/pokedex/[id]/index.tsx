@@ -3,8 +3,10 @@ import {useCallback, useEffect, useState} from "react";
 import {type PokemonResponse} from "~/lib/types";
 import {useRouter} from "next/router";
 import { FaArrowLeft, FaArrowRight, FaPencilAlt, FaTrash } from "react-icons/fa";
+import Modal from 'react-modal';
 
 export default function Detail() {
+  const [showModal, setShowModal] = useState(false);
   const [pokemon, setPokemon] = useState<PokemonResponse | null>(null);
   const [photo, setPhoto] = useState<string>('')
   const [evolutionPhoto, setEvolutionPhoto] = useState<string>('')
@@ -24,6 +26,24 @@ export default function Detail() {
     }
   }, [id]);
 
+  const deletePokemon = async () => {
+    try {
+      await fetch(`/api/pokemon/${id}`, {method: 'DELETE'});
+      closeDeleteModal()
+      await router.push("/")
+    } catch (error) {
+      alert('Server had a problem');
+    }
+  }
+
+  const openDeleteModal = () => {
+    setShowModal(true)
+  }
+
+  const closeDeleteModal = () => {
+    setShowModal(false)
+  }
+
   useEffect(() => {
     void (async () => {
       const pokemon = await getPokemon()
@@ -35,6 +55,16 @@ export default function Detail() {
     })();
   }, [getPokemon]);
 
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
   return (
     <>
       {pokemon ? (
@@ -50,7 +80,8 @@ export default function Detail() {
                 </button>
               </Link>
               <button type="button"
-                      className="text-white bg-gray-solid font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                      className="text-white bg-gray-solid font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                      onClick={openDeleteModal}>
                 <FaTrash className="react-icons-align-text mr-2"/>
                 Delete
               </button>
@@ -103,6 +134,25 @@ export default function Detail() {
               </div>
             </div>
           </div>
+          <Modal
+             isOpen={showModal}
+             contentLabel="Minimal Modal Example"
+             style={customStyles}
+          >
+            <div>Are you sure?</div>
+            <div className="flex justify-between mt-2">
+              <button type="button"
+                      className="text-white bg-gray-solid font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                      onClick={closeDeleteModal}>
+                Cancel
+              </button>
+              <button type="button"
+                      className="text-white bg-gray-solid font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                      onClick={deletePokemon}>
+                Delete
+              </button>
+            </div>
+          </Modal>
         </div>
       ) : (
         <div></div>
